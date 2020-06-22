@@ -1,17 +1,17 @@
 'use strict';
 var promise = require('bluebird');
 var request = require('request');
-var syncRequest = require('sync-request');
+//var syncRequest = require('sync-request'); "sync-request": "^6.0.0",
 var net = require('net');
 
 module.exports = function (RED) {
+
     function wlanthermo(config) {
         RED.nodes.createNode(this, config);
         var context = this.context();
         var node = this;
         this.on('input', function (msg) {
-            // Debug
-            config.ip = '192.168.0.167';
+
             // Check is IP Config?!
             if (config.ip === undefined || config.ip === '') {
                 node.status({ fill: 'red', shape: 'dot', text: 'Please set IP-Address' });
@@ -24,7 +24,9 @@ module.exports = function (RED) {
                     method: 'GET',
                     json: true
                 }, function (error, response, body) {
-                    node.warn(response);
+                    msg.payload = response.body;
+                    node.send(msg);
+                    node.status({ fill: 'green', shape: 'dot', text: 'Received data at: ' + CurrentTimeStamp() });
                 });
 
             }, function (err) {
@@ -32,12 +34,11 @@ module.exports = function (RED) {
             });
         });
     }
+
+    RED.nodes.registerType('WLANThermo', wlanthermo);
 }
 
-RED.nodes.registerType('WLANThermo', wlanthermo);
-
-
-//////////// Tools
+//=============== Tools =================//
 function checkConnection(ip) {
     return new promise(function (resolve, reject) {
         var timeout = 1000;

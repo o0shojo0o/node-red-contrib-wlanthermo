@@ -4,7 +4,6 @@
     "description": "WLANThermo, the smartest way to have a barbeque!",
     "dependencies": {
         "request": "^2.88.0",
-        "sync-request": "^6.0.0",
         "bluebird": "^3.3.4"
     },
     "engines": {
