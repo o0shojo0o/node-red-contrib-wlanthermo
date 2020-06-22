@@ -1,0 +1,29 @@
+{
+    "name": "node-red-contrib-wlanthermo",
+    "version": "0.0.1",
+    "description": "WLANThermo, the smartest way to have a barbeque!",
+    "dependencies": {
+        "request": "^2.88.0",
+        "sync-request": "^6.0.0",
+        "bluebird": "^3.3.4"
+    },
+    "engines": {
+        "node": ">=5.0.0"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/o0shojo0o/node-red-contrib-wlanthermo.git"
+    },
+    "keywords": [
+        "node-red"
+    ],
+    "node-red": {
+        "nodes": {
+            "pixelit": "wlanthermo/wlanthermo.js"
+        }
+    },
+    "author": {
+        "name": "Dennis Hinzpeter"
+    }
+}
