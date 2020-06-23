@@ -38,10 +38,8 @@ module.exports = function (RED) {
                         _node.status({ fill: 'green', shape: 'dot', text: 'Alert ended at: ' + tools.CurrentTimeStamp() });
                         _activeAlert = false;
                     }
-
                     _context.set(_channel.number.toString(), _activeAlert);
                 }
-
             }
         });
     }
