@@ -9,7 +9,7 @@ module.exports = function (RED) {
 
         this.on('input', function (msg) {
             var _channels = msg.payload.channel;
-
+            var messages = [];
             for (var i = 0; i < _channels.length; i++) {
                 var _channel = _channels[i];
                 var _activeAlert = _context.get(_channel.number.toString()) || false;
@@ -18,15 +18,15 @@ module.exports = function (RED) {
                 // Keine Kerntemperatur Messung? channel.min == -1 ist eine Kerntemperatur Messung!
                 if (_channel.temp < 999 && _channel.min != -1) {
                     if (_channel.temp > _channel.max) {
-                        msg.topic = 'MaxTempAlert';
-                        msg.payload = {
+                        var _mymsg = {};
+                        _mymsg.topic = 'MaxTempAlert';
+                        _mymsg.payload = {
                             name: _channel.name,
                             maxtemp: _channel.max,
                             currenttemp: _channel.temp,
                             overtemp: (_channel.temp - _channel.max).toFixed(1)
                         };
-                        _node.send(msg);
-
+                        _node.send(_mymsg);
                         if (_activeAlert != true) {
                             _node.status({ fill: 'red', shape: 'dot', text: 'Alert [' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
                             _activeAlert = true;
@@ -41,7 +41,6 @@ module.exports = function (RED) {
                 }
                 _context.set(_channel.number.toString(), _activeAlert);
             }
-
             function DisableAlert() {
                 _node.status({ fill: 'green', shape: 'dot', text: 'Alert ended [' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
                 _activeAlert = false;
