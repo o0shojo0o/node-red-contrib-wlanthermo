@@ -29,12 +29,12 @@ module.exports = function (RED) {
                         _node.send(msg);
 
                         if (_activeAlert != true) {
-                            _node.status({ fill: 'red', shape: 'dot', text: 'Alert at: ' + tools.CurrentTimeStamp() });
+                            _node.status({ fill: 'red', shape: 'dot', text: 'Alert [ ' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
                             _activeAlert = true;
                         }
                     }
                     else if (_activeAlert != false) {
-                        _node.status({ fill: 'green', shape: 'dot', text: 'Alert ended at: ' + tools.CurrentTimeStamp() });
+                        _node.status({ fill: 'green', shape: 'dot', text: 'Alert ended [ ' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
                         _activeAlert = false;
                     }
                     _context.set(_channel.number.toString(), _activeAlert);
