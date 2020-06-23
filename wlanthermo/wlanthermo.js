@@ -37,7 +37,6 @@ module.exports = function (RED) {
                         _context.set('connectionState', true);
                     }
                 });
-
             }, function (err) {
                 // Nur setzten wenn der ConnectionState sich aendert
                 if (_connectionState != false) {
@@ -45,16 +44,9 @@ module.exports = function (RED) {
                     // ConnectionState im Contex speichern
                     _context.set('connectionState', false);
                 }
-
-
             });
-
-
-
-
         });
     }
-
     RED.nodes.registerType('WLAN Thermo', WLANThermo);
 }
 
