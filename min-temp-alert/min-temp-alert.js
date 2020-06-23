@@ -12,13 +12,12 @@ module.exports = function (RED) {
 
             for (var i = 0; i < _channels.length; i++) {
                 var _channel = _channels[i];
+                var _activeAlert = _context.get(_channel.number.toString()) || false;
 
                 // Aktiver Channel? channel.temp == 999 ist inaktiv!
                 // Keine Kerntemperatur Messung? channel.min == -1 ist eine Kerntemperatur Messung!
                 // channel.min == 0 hat keine Min Temp!
                 if (_channel.temp < 999 && _channel.min != -1 && _channel.min != 0) {
-                    var _activeAlert = _context.get(_channel.number.toString()) || false;
-
                     if (_channel.temp < _channel.min) {
                         msg.topic = 'MinTempAlert';
                         msg.payload = {
@@ -35,11 +34,18 @@ module.exports = function (RED) {
                         }
                     }
                     else if (_activeAlert != false) {
-                        _node.status({ fill: 'green', shape: 'dot', text: 'Alert ended [' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
-                        _activeAlert = false;
+                        DisableAlert();
                     }
-                    _context.set(_channel.number.toString(), _activeAlert);
                 }
+                else if (_activeAlert == true) {
+                    DisableAlert();
+                }
+                _context.set(_channel.number.toString(), _activeAlert);
+            }
+
+            function DisableAlert() {
+                _node.status({ fill: 'green', shape: 'dot', text: 'Alert ended [' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
+                _activeAlert = false;
             }
         });
     }
