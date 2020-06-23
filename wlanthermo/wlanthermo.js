@@ -1,68 +1,78 @@
 'use strict';
 var promise = require('bluebird');
 var request = require('request');
+var tools = require('../lib/tools');
 //var syncRequest = require('sync-request'); "sync-request": "^6.0.0",
 var net = require('net');
 
 module.exports = function (RED) {
 
-    function wlanthermo(config) {
+    function WLANThermo(config) {
         RED.nodes.createNode(this, config);
-        var context = this.context();
-        var node = this;
+        var _context = this.context();
+        var _node = this;
         this.on('input', function (msg) {
 
             // Check is IP Config?!
             if (config.ip === undefined || config.ip === '') {
-                node.status({ fill: 'red', shape: 'dot', text: 'Please set IP-Address' });
+                _node.status({ fill: 'red', shape: 'dot', text: 'Please set IP-Address' });
                 return;
             }
+            // ConnectionState aus dem Contex laden (default false)
+            var _connectionState = _context.get('connectionState');
 
-            checkConnection(config.ip).then(function () {
+            CheckConnection(config.ip).then(function () {
                 request({
                     uri: 'http://' + config.ip + '/data',
                     method: 'GET',
                     json: true
                 }, function (error, response, body) {
-                    msg.payload = response.body;
-                    node.send(msg);
-                    node.status({ fill: 'green', shape: 'dot', text: 'Received data at: ' + CurrentTimeStamp() });
+                    msg.payload = body;
+                    _node.send(msg);
+
+                    // Nur setzten wenn der ConnectionState sich aendert
+                    if (_connectionState != true) {
+                        _node.status({ fill: 'green', shape: 'dot', text: 'Online at: ' + tools.CurrentTimeStamp() });
+                        // ConnectionState im Contex speichern
+                        _context.set('connectionState', true);
+                    }
                 });
 
             }, function (err) {
-                node.status({ fill: 'yellow', shape: 'dot', text: 'Offline at: ' + CurrentTimeStamp() });
+                // Nur setzten wenn der ConnectionState sich aendert
+                if (_connectionState != false) {
+                    _node.status({ fill: 'yellow', shape: 'dot', text: 'Offline at: ' + tools.CurrentTimeStamp() });
+                    // ConnectionState im Contex speichern
+                    _context.set('connectionState', false);
+                }
+
+
             });
+
+
+
+
         });
     }
 
-    RED.nodes.registerType('WLANThermo', wlanthermo);
+    RED.nodes.registerType('WLAN Thermo', WLANThermo);
 }
 
-//=============== Tools =================//
-function checkConnection(ip) {
+function CheckConnection(ip) {
     return new promise(function (resolve, reject) {
-        var timeout = 1000;
-        var timer = setTimeout(function () {
+        var _timeout = 1000;
+        var _timer = setTimeout(function () {
             reject('timeout');
-            socket.end();
-        }, timeout);
-        var socket = net.createConnection(80, ip, function () {
-            clearTimeout(timer);
+            _socket.end();
+        }, _timeout);
+        var _socket = net.createConnection(80, ip, function () {
+            clearTimeout(_timer);
             resolve();
-            socket.end();
+            _socket.end();
         });
-        socket.on('error', function (err) {
-            clearTimeout(timer);
+        _socket.on('error', function (err) {
+            clearTimeout(_timer);
             reject(err);
         });
     });
-}
-
-function CurrentTimeStamp() {
-    var _current = new Date().toString();
-    var _month = _current.split(' ')[1];
-    var _day = _current.split(' ')[2];
-    var _time = _current.split(' ')[4];
-
-    return _month + ' ' + _day + ', ' + _time;
 }

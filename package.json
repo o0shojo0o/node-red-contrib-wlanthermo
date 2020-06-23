@@ -19,7 +19,9 @@
     ],
     "node-red": {
         "nodes": {
-            "pixelit": "wlanthermo/wlanthermo.js"
+            "wlanthermo": "wlanthermo/wlanthermo.js",
+            "wlanthermo-max-temp-alert": "max-temp-alert/max-temp-alert.js",
+            "wlanthermo-min-temp-alert": "min-temp-alert/min-temp-alert.js"
         }
     },
     "author": {
