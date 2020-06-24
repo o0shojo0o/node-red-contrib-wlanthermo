@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    RED.nodes.registerType('CoreTemp Alert', {
+        category: 'WLANThermo',
+        color: '#FF6961',
+        defaults: {
+            name: {
+                value: "CoreTemp Alert"
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "wlanthermo.png",
+        label: function () {
+            return this.name || "CoreTemp Alert";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="CoreTemp Alert">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>      
+</script>

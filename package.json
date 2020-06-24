@@ -21,7 +21,9 @@
         "nodes": {
             "wlanthermo": "wlanthermo/wlanthermo.js",
             "wlanthermo-max-temp-alert": "max-temp-alert/max-temp-alert.js",
-            "wlanthermo-min-temp-alert": "min-temp-alert/min-temp-alert.js"
+            "wlanthermo-min-temp-alert": "min-temp-alert/min-temp-alert.js",
+            "wlanthermo-core-temp-alert": "core-temp-alert/core-temp-alert.js",
+            "wlanthermo-core-temp-warn": "core-temp-warn/core-temp-warn.js"
         }
     },
     "author": {

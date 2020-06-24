@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('CoreTemp Warn', {
+        category: 'WLANThermo',
+        color: '#FF6961',
+        defaults: {
+            name: {
+                value: "CoreTemp Warn"
+            },
+            warnTemp: {
+                value: 5
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "wlanthermo.png",
+        label: function () {
+            return this.name || "CoreTemp Warn";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="CoreTemp Warn">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>      
+    <div class="form-row">        
+        <label for="node-input-warnTemp"><i class="icon-tag"></i> Diff Temp</label>
+        <input type="number" id="node-input-warnTemp">        
+    </div>
+</script>
