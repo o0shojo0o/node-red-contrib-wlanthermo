@@ -9,6 +9,7 @@ module.exports = function (RED) {
 
     function WLANThermo(config) {
         RED.nodes.createNode(this, config);
+        this.status({});
         var _context = this.context();
         var _node = this;
         this.on('input', function (msg) {

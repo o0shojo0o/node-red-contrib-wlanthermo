@@ -4,6 +4,7 @@ module.exports = function (RED) {
 
     function CoreTempAlert(config) {
         RED.nodes.createNode(this, config);
+        this.status({});
         var _context = this.context();
         var _node = this;
 

@@ -4,6 +4,7 @@ module.exports = function (RED) {
 
     function CoreTempWarn(config) {
         RED.nodes.createNode(this, config);
+        this.status({});
         var _context = this.context();
         var _node = this;
         var _warnTemp = config.warnTemp < 0 ? 0 : config.warnTemp;
