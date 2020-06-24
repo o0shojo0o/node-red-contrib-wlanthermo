@@ -18,15 +18,15 @@ module.exports = function (RED) {
                 // Keine Kerntemperatur Messung? channel.min == -1 ist eine Kerntemperatur Messung!
                 if (_channel.temp < 999 && _channel.min != -1) {
                     if (_channel.temp > _channel.max) {
-                        var _mymsg = {};
-                        _mymsg.topic = 'MaxTempAlert';
-                        _mymsg.payload = {
+                        var _newMsg = {};
+                        _newMsg.topic = 'MaxTempAlert';
+                        _newMsg.payload = {
                             name: _channel.name,
                             maxtemp: _channel.max,
                             currenttemp: _channel.temp,
                             overtemp: (_channel.temp - _channel.max).toFixed(1)
                         };
-                        _node.send(_mymsg);
+                        _node.send(_newMsg);
                         if (_activeAlert != true) {
                             _node.status({ fill: 'red', shape: 'dot', text: 'Alert [' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
                             _activeAlert = true;

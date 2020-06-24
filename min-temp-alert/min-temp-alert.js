@@ -19,15 +19,15 @@ module.exports = function (RED) {
                 // channel.min == 0 hat keine Min Temp!
                 if (_channel.temp < 999 && _channel.min != -1 && _channel.min != 0) {
                     if (_channel.temp < _channel.min) {
-                        var _mymsg = {};
-                        _mymsg.topic = 'MinTempAlert';
-                        _mymsg.payload = {
+                        var _newMsg = {};
+                        _newMsg.topic = 'MinTempAlert';
+                        _newMsg.payload = {
                             name: _channel.name,
                             mintemp: _channel.min,
                             currenttemp: _channel.temp,
                             undertemp: (_channel.min - _channel.temp).toFixed(1)
                         };
-                        _node.send(_mymsg);
+                        _node.send(_newMsg);
 
                         if (_activeAlert != true) {
                             _node.status({ fill: 'red', shape: 'dot', text: 'Alert [' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });

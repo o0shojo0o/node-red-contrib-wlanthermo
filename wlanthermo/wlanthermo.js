@@ -52,7 +52,7 @@ module.exports = function (RED) {
 
 function CheckConnection(ip) {
     return new promise(function (resolve, reject) {
-        var _timeout = 1000;
+        var _timeout = 2000;
         var _timer = setTimeout(function () {
             reject('timeout');
             _socket.end();
