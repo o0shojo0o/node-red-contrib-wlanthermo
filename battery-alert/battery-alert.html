@@ -9,6 +9,9 @@
             alertLvl:
             {
                 value: 10
+            },
+            messageRepeat: {
+                value: true
             }
         },
         inputs: 1,
@@ -28,6 +31,10 @@
     <div class="form-row">        
         <label for="node-input-alertLvl"><i class="icon-tag"></i> Alert Level</label>
         <input type="number" id="node-input-alertLvl">        
+    </div>
+    <div class="form-row"> 
+        <input type="checkbox" id="node-input-messageRepeat" style="display: inline-block; width: auto; vertical-align: top; margin-left: 105px; "/>
+        <label for="node-input-messageRepeat" style="width: auto;">Bei Alarm nur eine Message</label>
     </div>
 </script>
 

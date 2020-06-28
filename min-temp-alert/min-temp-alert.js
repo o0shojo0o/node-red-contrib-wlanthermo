@@ -28,11 +28,18 @@ module.exports = function (RED) {
                             currenttemp: _channel.temp,
                             undertemp: (_channel.min - _channel.temp).toFixed(1)
                         };
-                        _node.send(_newMsg);
+
+                        if (config.messageRepeat != true) {
+                            _node.send(_newMsg);
+                        }
 
                         if (_activeAlert != true) {
                             _node.status({ fill: 'red', shape: 'dot', text: 'Alert [' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
                             _activeAlert = true;
+
+                            if (config.messageRepeat === true) {
+                                _node.send(_newMsg);
+                            }
                         }
                     }
                     else if (_activeAlert != false) {

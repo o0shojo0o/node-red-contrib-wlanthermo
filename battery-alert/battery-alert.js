@@ -17,11 +17,17 @@ module.exports = function (RED) {
                 var _newMsg = {};
                 _newMsg.topic = 'BatteryAlert';
                 _newMsg.payload = _batLvl;
-                _node.send(_newMsg);
+
+                if (config.messageRepeat != true) {
+                    _node.send(_newMsg);
+                }
 
                 if (_activeAlert != true) {
                     _node.status({ fill: 'red', shape: 'dot', text: 'Alert ' + _batLvl + '% at: ' + tools.CurrentTimeStamp() });
                     _activeAlert = true;
+                    if (config.messageRepeat === true) {
+                        _node.send(_newMsg);
+                    }
                 }
             }
             else if (_activeAlert != false) {

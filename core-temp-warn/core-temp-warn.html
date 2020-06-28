@@ -8,6 +8,9 @@
             },
             warnTemp: {
                 value: 5
+            },
+            messageRepeat: {
+                value: true
             }
         },
         inputs: 1,
@@ -27,6 +30,10 @@
     <div class="form-row">        
         <label for="node-input-warnTemp"><i class="icon-tag"></i> Diff Temp</label>
         <input type="number" id="node-input-warnTemp">        
+    </div>
+    <div class="form-row"> 
+        <input type="checkbox" id="node-input-messageRepeat" style="display: inline-block; width: auto; vertical-align: top; margin-left: 105px; "/>
+        <label for="node-input-messageRepeat" style="width: auto;">Bei Warnung nur eine Message</label>
     </div>
 </script>
 

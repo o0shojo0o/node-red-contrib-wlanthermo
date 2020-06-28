@@ -5,6 +5,9 @@
         defaults: {
             name: {
                 value: "MinTemp Alert"
+            },
+            messageRepeat: {
+                value: true
             }
         },
         inputs: 1,
@@ -20,7 +23,11 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
-    </div>      
+    </div>   
+    <div class="form-row"> 
+        <input type="checkbox" id="node-input-messageRepeat" style="display: inline-block; width: auto; vertical-align: top; margin-left: 105px; "/>
+        <label for="node-input-messageRepeat" style="width: auto;">Bei Alarm nur eine Message</label>
+    </div>   
 </script>
 
 <script type="text/x-red" data-help-name="MinTemp Alert">

@@ -27,11 +27,18 @@ module.exports = function (RED) {
                             currenttemp: _channel.temp,
                             difftemp: (_channel.max - _channel.temp).toFixed(1)
                         };
-                        _node.send(_newMsg);
+
+                        if (config.messageRepeat != true) {
+                            _node.send(_newMsg);
+                        }
 
                         if (_activeWarn != true) {
                             _node.status({ fill: 'yellow', shape: 'dot', text: 'Warning [' + _channel.number + ' - ' + _channel.name + '] at: ' + tools.CurrentTimeStamp() });
                             _activeWarn = true;
+
+                            if (config.messageRepeat === true) {
+                                _node.send(_newMsg);
+                            }
                         }
                     }
                     else if (_activeWarn != false) {

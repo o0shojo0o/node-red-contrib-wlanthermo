@@ -15,7 +15,8 @@
         "url": "https://github.com/o0shojo0o/node-red-contrib-wlanthermo.git"
     },
     "keywords": [
-        "node-red"
+        "node-red",
+        "wlanthermo"
     ],
     "node-red": {
         "nodes": {
