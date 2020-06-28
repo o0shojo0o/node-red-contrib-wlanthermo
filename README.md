@@ -6,19 +6,19 @@
 
 ## Nodes 
 ### WLAN Thermo Node
-Dieser Node fragt die HTTP API des [WLANThermo Nano](https://wlanthermo.de/) ab.
+fragt die HTTP API des [WLANThermo Nano](https://wlanthermo.de/) ab.
 
 
 ### MaxTemp Alert Node
-Dieser Node ist zur Überwachung der Temperatur-Obergrenze gedacht.
+überwacht die Temperatur-Obergrenze.
 
 
 ### MinTemp Alert Node
-Dieser Node ist zur Überwachung der Temperatur-Untergrenze gedacht.
+überwacht die Temperatur-Untergrenze.
 
 
 ### CoreTemp Warn Node
-Dieser Node ist zur Überwachung der Kerntemperatur gedacht.
+überwacht die Kerntemperatur.
 
 Wenn ein Kanal eine **Temperatur-Untergrenze von -1** konfiguriert hat, geht dieser Node von einer Kerntemperatur Messung aus!
 
@@ -26,10 +26,10 @@ Die **Diff Temp** gibt an, ab wann gewarnt werden soll, z.B. es ist eine **Tempe
 
 
 ### CoreTemp Alert Node
-Dieser Node ist zur Überwachung der Kerntemperatur gedacht.
+überwacht die Kerntemperatur.
 
 Wenn ein Kanal eine **Temperatur-Untergrenze von -1** konfiguriert hat, geht dieser Node von einer Kerntemperatur Messung aus!
 
 
 ### Battery Alert Node
-Dieser Node ist zur Überwachung der Batterie gedacht.
+überwachtder das Batterie Level.
