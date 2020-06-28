@@ -15,7 +15,7 @@ module.exports = function (RED) {
 
             if (_batLvl <= _alertLvl) {
                 var _newMsg = {};
-                _newMsg.topic = 'BatteryAlert';
+                _newMsg.topic = config.name;
                 _newMsg.payload = _batLvl;
 
                 if (config.messageRepeat != true) {

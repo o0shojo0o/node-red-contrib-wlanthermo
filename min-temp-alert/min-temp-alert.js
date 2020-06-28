@@ -21,7 +21,7 @@ module.exports = function (RED) {
                 if (_channel.temp < 999 && _channel.min != -1 && _channel.min != 0) {
                     if (_channel.temp < _channel.min) {
                         var _newMsg = {};
-                        _newMsg.topic = 'MinTempAlert';
+                        _newMsg.topic = config.name;
                         _newMsg.payload = {
                             name: _channel.name,
                             mintemp: _channel.min,
