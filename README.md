@@ -32,4 +32,4 @@ Wenn ein Kanal eine **Temperatur-Untergrenze von -1** konfiguriert hat, geht die
 
 
 ### Battery Alert Node
-überwachtder das Batterie Level.
+überwacht das Batterie Level.
